@@ -26,7 +26,7 @@ fi
 mkdir $WORKSPACE/job_bwUC2_${SLURM_JOB_ID}
 ln -s $WORKSPACE/job_bwUC2_${SLURM_JOB_ID} tmp
 
-mpirun -n 40 --bind-to core --map-by core ./settlingSphere3D | tee -a sphere.txt
+mpirun -n 40 --bind-to core --map-by core ./settlingSphere3D | tee -a settlingSphere.txt
 
 # prints "size, steps, cuboids_per_process, process count, thread count, MLUPs per process, total MLUPs"
 #for size in 100. 150. 200. 250.;
