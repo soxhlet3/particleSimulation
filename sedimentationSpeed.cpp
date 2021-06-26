@@ -51,7 +51,7 @@ double get_sedimentationSpeed(double pDiameter, double pDensity, double fDensity
 	int regimeType = 0; //1 --- Stoke's | 2 --- Transitional | 3 --- Newton's |
 	double Re = 0;
 	double cw = 1;
-   double currentSpeed = 0;
+	double currentSpeed = 0;
    sedimentationSpeed = sqrt(4*(pDensity-fDensity)*g*pDiameter/(3*fDensity))*sqrt(1/cw);
    
 	do {
