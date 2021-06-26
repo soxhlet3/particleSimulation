@@ -54,7 +54,7 @@ double get_sedimentationSpeed(double pDiameter, double pDensity, double fDensity
 	double currentSpeed = 0;
 	
 	sedimentationSpeed = sqrt(4*(pDensity-fDensity)*g*pDiameter/(3*fDensity))*sqrt(1/cw);
-   do {
+	do {
 		Re = sedimentationSpeed*pDiameter/fKinVis;
 		cout << "Current Re = " << Re << endl;
 	
