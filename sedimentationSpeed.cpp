@@ -2,55 +2,56 @@
 #include <cmath>
 using namespace std;
 
-const float g = 9.81;
+const double g = 9.81;
 const int maxIter = 1e3;
-const float maxRes = 1e-7;
+const double maxRes = 1e-7;
 
-float get_pDiameter() {
-	float pDiameter = 0;
+double get_pDiameter() {
+	double pDiameter = 0;
 	cout << "Enter particle diameter in [m]: ";
 	cin >> pDiameter;
 	return pDiameter;
 }
 
-float get_pDensity() {
-	float pDensity = 0;
+double get_pDensity() {
+	double pDensity = 0;
 	cout << "Enter particle density in [kg/m³]: ";
 	cin >> pDensity;
 	return pDensity;
 }
 
-float get_fDensity() {
-	float fDensity = 0;
+double get_fDensity() {
+	double fDensity = 0;
 	cout << "Enter fluid density in [kg/m³]: ";
 	cin >> fDensity;
 	return fDensity;
 }
 
-float get_fKinVis() {
-	float fKinVis = 0;
+double get_fKinVis() {
+	double fKinVis = 0;
 	cout << "Enter fluid kinematic viscosity in [m²/s]: ";
 	cin >> fKinVis;
 	return fKinVis;
 }
 
-void printInput(float pDiameter, float pDensity, float fDensity, float fKinVis) {
+void printInput(double pDiameter, double pDensity, double fDensity, double fKinVis) {
 	cout << "--------------------------------" << endl;
-	cout << "Calculating terminal sedimentation speed of a spherical particle with inputs: " << endl;
+	cout << "Calculating sedimentation speed of a spherical particle with inputs: " << endl;
 	cout << "Particle Diameter = " << pDiameter << " m" << endl;
 	cout << "Particle Density = " << pDensity << " kg/m³" << endl;
 	cout << "Fluid Density = " << fDensity << " kg/m³" << endl;
 	cout << "Fluid Kinematic Viscosity = " << fKinVis << " m²/s" << endl;
+	cout << "--------------------------------" << endl;
 }
 
-float get_sedimentationSpeed(float pDiameter, float pDensity, float fDensity, float fKinVis, float g, int maxIter, float maxRes) {
-	float sedimentationSpeed = 0;
+double get_sedimentationSpeed(double pDiameter, double pDensity, double fDensity, double fKinVis, double g, int maxIter, double maxRes) {
+	double sedimentationSpeed = 0;
 	int iter = 0;
-	float res = 0;
+	double res = 0;
 	int regimeType = 0; //1 --- Stoke's | 2 --- Transitional | 3 --- Newton's |
-	float Re = 0;
-	float cw = 1;
-   float currentSpeed = 0;
+	double Re = 0;
+	double cw = 1;
+   double currentSpeed = 0;
    sedimentationSpeed = sqrt(4*(pDensity-fDensity)*g*pDiameter/(3*fDensity))*sqrt(1/cw);
    
 	do {
@@ -108,13 +109,13 @@ float get_sedimentationSpeed(float pDiameter, float pDensity, float fDensity, fl
 	return sedimentationSpeed;
 }
 
-void printResult(float sedimentationSpeed) {
+void printResult(double sedimentationSpeed) {
 	cout << "--------------------------------" << endl;
 	cout << "Sedimentation Speed = " << sedimentationSpeed << " m/s" << endl;
 }
 
 int main() {
-	float pDiameter = 0, pDensity = 2500, fDensity = 1000, fKinVis = 1e-5, sedimentationSpeed = 0;
+	double pDiameter = 0, pDensity = 2500, fDensity = 1000, fKinVis = 1e-5, sedimentationSpeed = 0;
 	pDiameter = get_pDiameter();
 	//pDensity = get_pDensity();
 	//fDensity = get_fDensity();
