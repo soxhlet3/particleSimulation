@@ -6,6 +6,7 @@ const double g = 9.81;
 const int maxIter = 1e3;
 const double maxRes = 1.e-7;
 const double pi = 3.141592654;
+double alpha = 0.5; //Volumenanteil der anhaftenden Flüssigkeit (i.d.R 0.5) bzw. des anhaftenden Gases (i.d.R 0)
 
 double get_pDiameter() {
 	double pDiameter = 0.;
@@ -119,16 +120,26 @@ void printResult(double sedimentationSpeed) {
 	cout << "Sedimentation Speed = " << sedimentationSpeed << " m/s" << endl;
 }
 
+double get_accelerationTime(double pDiameter, double pDensity, double fDensity, double fKinVis, double sedimentationSpeed) {
+	return 4.61*(pDensity + alpha*fDensity)*pDiameter*pDiameter/(18.*fKinVis*fDensity);
+}
+
+double get_accelerationDistance(double pDiameter, double pDensity, double fDensity, double fKinVis, double sedimentationSpeed) {
+	return 3.62*sedimentationSpeed*(pDensity + alpha*fDensity)*pDiameter*pDiameter/(18.*fKinVis*fDensity);
+}
+
 int main() {
-	double pDiameter = 0., pDensity = 2500., fDensity = 1000., fKinVis = 1.e-5, sedimentationSpeed = 0.;
+	double pDiameter = 0., pDensity = 2500., fDensity = 1000., fKinVis = 1.e-5, sedimentationSpeed = 0., accelerationTime = 0., accelerationDistance = 0.;
 	pDiameter = get_pDiameter();
-	//pDensity = get_pDensity();
-	//fDensity = get_fDensity();
-	//fKinVis = get_fKinVis();
+	pDensity = get_pDensity();
+	fDensity = get_fDensity();
+	fKinVis = get_fKinVis();
 	printInput(pDiameter, pDensity, fDensity, fKinVis);
 	sedimentationSpeed = get_sedimentationSpeed(pDiameter, pDensity, fDensity, fKinVis, g, maxIter, maxRes);
 	printResult(sedimentationSpeed);
-	cout << "calculation completed" << endl;
-	
+	accelerationTime = get_accelerationTime(pDiameter, pDensity, fDensity, fKinVis, sedimentationSpeed);
+	cout << "Acceleration time to 99% sedimentation speed = " << accelerationTime << " s" << endl;
+	accelerationDistance = get_accelerationDistance(pDiameter, pDensity, fDensity, fKinVis, sedimentationSpeed);
+	cout << "Acceleration distance to 99% sedimentation speed = " << accelerationDistance*1000. << " mm" << endl;
 	return 0;
 }
