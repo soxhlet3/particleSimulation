@@ -108,7 +108,7 @@ double get_sedimentationSpeed(double pDiameter, double pDensity, double fDensity
 			cout << "Re is outside of valid interval" << endl;
 			break;
 	}
-	cout << "Residuum = " << res << endl;
+	cout << "Residual = " << res << endl;
 	cout << "--------------------------------" << endl;
 	cout << "Re = " << Re << endl;
 	cout << "cw = " << cw << endl;
