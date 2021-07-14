@@ -5,7 +5,7 @@ using namespace std;
 const double pi = 3.141592654;
 const double delta_t = 0.001; //zeitliche Auflösung in s
 const int maxIter = 1e6;
-const double maxRes = 1.e-4;
+const double maxRes = 1.e-3;
 
 double get_D() {
 	double D = 0.;
